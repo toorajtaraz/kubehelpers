@@ -13,7 +13,7 @@ else
   echo "\$test_for_nameserver is fine" 
 fi 
  
-output=$(sed "/$(echo $(ip addr | sed '/2:/,$!d') | awk '{print $2}')/a\            nameservers:\n                addresses: [185.51.200.2, 178.22.122.100]" /etc/netplan/50-cloud-init.yaml | sudo tee "/etc/netplan/50-cloud-init.yaml") 
+output=$(sed "/set-name: ens3/a\            nameservers:\n                addresses: [185.51.200.2, 178.22.122.100]" /etc/netplan/50-cloud-init.yaml | sudo tee "/etc/netplan/50-cloud-init.yaml") 
 sudo netplan apply > /dev/null  && echo "netplan config DONE" 
  
  
