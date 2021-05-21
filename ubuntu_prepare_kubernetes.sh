@@ -10,7 +10,7 @@ test_for_nameserver=$(sed '/nameservers/,$!d' /etc/netplan/50-cloud-init.yaml)
 if [[ $test_for_nameserver = *[!\ ]* ]]; then 
         test_out=$(sed '/nameservers:/,+1d' /etc/netplan/50-cloud-init.yaml | sudo tee "/etc/netplan/50-cloud-init.yaml") 
 else 
-  echo "\$param consists of spaces only" 
+  echo "\$test_for_nameserver is fine" 
 fi 
  
 output=$(sed "/$(echo $(ip addr | sed '/2:/,$!d') | awk '{print $2}')/a\            nameservers:\n                addresses: [185.51.200.2, 178.22.122.100]" /etc/netplan/50-cloud-init.yaml | sudo tee "/etc/netplan/50-cloud-init.yaml") 
